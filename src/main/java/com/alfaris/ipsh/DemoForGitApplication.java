@@ -8,7 +8,8 @@ public class DemoForGitApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoForGitApplication.class, args);
-		demo d=new demo();	
+		demo d=new demo();
+	
 	}
 
 }
