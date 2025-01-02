@@ -51,7 +51,7 @@ public class Localfilecontroller {
 		return new ResponseEntity<>(localFileService.uplodeFileOnly(file), new HttpHeaders(), HttpStatus.OK);
 
 	}
-	
+	//API to get any file from database
 	@GetMapping("/get")
 	public ResponseEntity<byte[]> getMethodName(@RequestParam("id") long id) {
 		FileAdd file=localFileService.getFileById(id);
