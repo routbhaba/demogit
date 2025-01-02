@@ -64,8 +64,8 @@ public class LocalFileService {
 		 
 	}
 
-	public byte[] getFileById(long id) {
-		FileAdd fileAdd=addREpository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Data Not found at this id"));
-		return fileAdd.getData();
+	public FileAdd getFileById(long id) {
+		return addREpository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Data Not found at this id"));
+		
 	}
 }

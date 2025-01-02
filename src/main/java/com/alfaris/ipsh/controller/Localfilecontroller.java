@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alfaris.ipsh.entity.FileAdd;
 import com.alfaris.ipsh.service.LocalFileService;
 
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.io.IOException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,8 +54,15 @@ public class Localfilecontroller {
 	
 	@GetMapping("/get")
 	public ResponseEntity<byte[]> getMethodName(@RequestParam("id") long id) {
-		return new ResponseEntity<>(localFileService.getFileById(id),new HttpHeaders(),HttpStatus.OK);
-	}
-	
+		FileAdd file=localFileService.getFileById(id);
+		return ResponseEntity.ok()
+				.contentType(MediaType.valueOf(file.getType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getName() + "\"")
+                .body(file.getData());
 
+	}
+
+	
+	
+ 
 }
