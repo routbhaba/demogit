@@ -15,18 +15,15 @@ import lombok.Setter;
 @Table(name="local_file")
 public class LocalFile {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="type")
-	private String type;
-	
-	@Lob
-	@Column(columnDefinition = "LONGBLOB")
-	private byte[] data;
+	  @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+
+	    private String fileName;
+	    private String filePath;
+	    private long size;
+
+	    @Lob
+	    private byte[] fileData; 
 
 }
