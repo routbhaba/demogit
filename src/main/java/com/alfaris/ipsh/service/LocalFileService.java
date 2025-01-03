@@ -53,18 +53,25 @@ public class LocalFileService {
 
 	public String uplodeFileOnly(MultipartFile file) throws IOException {
 		try {
+			if(file.isEmpty()) {
+				log.warn("File is Empty");
+				return "Failed to add the file";
+			}
 		FileAdd fileAdd = FileAdd.builder().name(file.getOriginalFilename()).type(file.getContentType())
 				.data(file.getBytes()).build();
 		addREpository.save(fileAdd);
+		log.info("file added successfully.");
 		return "File uploaded Successfully";
 		}catch(Exception e) {
-			log.error(e.getMessage());
+			log.error("Failed to add the file",e.getMessage());
 		}
+		log.error("Failed to upload the file .");
 		return "Failed to upload the data";
 		 
 	}
 
 	public FileAdd getFileById(long id) {
+		
 		return addREpository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Data Not found at this id"));
 		
 	}
